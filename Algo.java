@@ -1,5 +1,7 @@
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Arrays;
+import java.util.Random;
 
 public class Algo {
 
@@ -59,6 +61,8 @@ public class Algo {
         return t;
     }
 
+
+
     /*
         Retourne un tableau contenant les multiples de 4 à partir de 0 ({0, 4, 8, 16...}).
         Utile pour faire des essais de recherche dans un tableau trié.
@@ -70,4 +74,46 @@ public class Algo {
         return t;
     }
 
+    public static void TriInsertion(int tab[]) {
+        int pivot;
+        int j;
+        for (int i = 0; i < tab.length; i++) {
+            j = i;
+            pivot = tab[i];
+            while (j > 0 && tab[j-1] > pivot) {
+                tab[j] = tab[j-1];
+                j--;
+            }
+            tab[j] = pivot;
+
+        }
+    }
+
+    public static boolean rechercheVal (int nb, int tab[]){
+        for (int i = 0; i < tab.length; i++) {
+            if (tab[i]==nb){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean rechercheParDichotomie (int val, int tab []){
+        int indMilieu= tab.length/2;
+        int indDebut=0;
+        int indFin=tab.length;
+        boolean trouve= false;
+
+        while(indDebut<=indFin && trouve==false){
+            if (tab[indMilieu] == val)
+                trouve =true;
+            else if (tab[indMilieu] < val)
+                indDebut=indMilieu++;
+            else
+                indFin = indMilieu--;
+            indMilieu=(indFin+indDebut)/2;
+        }
+        return trouve;
+    }
 }
+
