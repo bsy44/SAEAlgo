@@ -102,6 +102,14 @@ public class Algo {
             boolean trouve= false;
 
             while(indDebut<=indFin && trouve==false){
-        }
+                if (tab[indMilieu] = val)
+                    trouve =true;
+                else if (tab[indMilieu] < val)
+                    indDebut=indMilieu++;
+                else
+                    indFin = indMilieu--;
+                indMilieu=(indFin+indDebut)/2
+            }
+            return trouve;
     }
 }
