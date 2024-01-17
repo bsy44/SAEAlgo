@@ -7,18 +7,17 @@ public class Algo {
 
     public static void main(String[] args) {
 
-//        int[] tab = générerTabAleatoireEntreBornes(1000,0,100);
-        int[] tab =générerTableauTriéParOrdreCroissant(1000000000);
+        int[] tab =générerTableauTriéParOrdreCroissant(10000000);
         long tempsDébut = System.nanoTime();
 
-        Arrays.sort(tab); // trie le tableau en utilisant un algorithme de type Quicksort
+        Arrays.sort(tab);
 
         long tempsFin = System.nanoTime();
-        System.out.println(rechercheDichotomiqueValProche(tab,25000000));
+        System.out.println(rechercheDichotomiqueValProche(tab,11000000));
 
         System.out.println("Temps de calcul en millisecondes: " + ((tempsFin - tempsDébut) / 1000000) );
 
-        //System.out.println(Arrays.toString(tab));
+       // System.out.println(Arrays.toString(tab));
 
     }
 
@@ -116,32 +115,71 @@ public class Algo {
         }
         return trouve;
     }
-        public static int rechercheDichotomiqueValProche(int[] tab, int valeur) {
-            int debut = 0;
-            int fin = tab.length - 1;
-            int milieu = tab.length/2;
-
-            while (debut <= fin) {
 
 
-                if (milieu == valeur) {
-                    return milieu;
-                }
+    public static int rechercheDichotomiqueValProche(int[] tab, int valeur) {
+        int debut = 0;
+        int fin = tab.length - 1;
 
-                if (milieu < valeur) {
-                    debut = milieu ++;
-                } else {
-                    fin = milieu --;
-                    milieu=(fin+debut)/2;
-                }
+        while (debut <= fin) {
+            int milieu = (debut + fin) / 2;
+
+            if (tab[milieu] == valeur) {
+                return tab[milieu];
             }
-            if (/*debut > 0 && (debut == tab.length || */Math.abs(tab[debut] - valeur) < Math.abs(tab[fin] - valeur)) {
 
-                return tab[debut];
+            if (tab[milieu] < valeur) {
+                debut = milieu + 1;
             } else {
-                return tab[debut - 1];
+                fin = milieu - 1;
             }
         }
 
+        if (debut == 0|| debut < tab.length && (fin < 0 || Math.abs(tab[debut] - valeur) < Math.abs(tab[fin] - valeur))) {
+            return tab[debut];
+        }
+        else {
+            return tab[fin];
+        }
+    }
+
+
+
+
+    public static int plusProcheValeur(int[] tab, int val) {
+            int valPlusProche = tab[0];
+
+            for (int i = 0; i < tab.length; i++) {
+                if (tab[i]==val)
+                    return tab[i];
+
+                else if (Math.abs(tab[i] - val) < Math.abs(valPlusProche - val)) {
+                    valPlusProche = tab[i];
+                }
+            }
+
+            return valPlusProche;
+    }
+
+    public static int[] PlusGrandVitesse (int [] tab, int val){
+        int [] T= new int[val];
+        for (int i=0; i< T.length;i++)
+            T[i]=tab[i];
+        Arrays.sort(T);
+
+        for (int i=val; i< tab.length;i++){
+            if (tab[i]>T[0]){
+                T[0]=tab[i];
+                Arrays.sort(T);
+            }
+        }
+        int longueur= T.length-1;
+        int [] Tab= new int[val];
+        for (int i=0; i< Tab.length; i++){
+            Tab[i]=T[longueur-i];
+        }
+        return Tab ;
+
+    }
 }
 
