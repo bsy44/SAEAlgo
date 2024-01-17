@@ -1,26 +1,25 @@
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Arrays;
-import java.util.Random;
 
 public class Algo {
 
     public static void main(String[] args) {
 
-        int[] tab =générerTableauTriéParOrdreCroissant(10000000);
+        int[] tab = générerTabAleatoire(300000);
         long tempsDébut = System.nanoTime();
 
         Arrays.sort(tab);
 
         long tempsFin = System.nanoTime();
-        System.out.println(rechercheDichotomiqueValProche(tab,11000000));
+
+        //triInsertion(tab);
+        rechercheDichotomiqueValProche(tab, 44);
 
         System.out.println("Temps de calcul en millisecondes: " + ((tempsFin - tempsDébut) / 1000000) );
 
        // System.out.println(Arrays.toString(tab));
 
     }
-
 
     /*
         Retourne un tableau de int rempli avec des valeurs aléatoires.
@@ -74,7 +73,7 @@ public class Algo {
         return t;
     }
 
-    public static void TriInsertion(int tab[]) {
+    public static int[] triInsertion(int tab[]) {
         int pivot;
         int j;
         for (int i = 0; i < tab.length; i++) {
@@ -87,6 +86,7 @@ public class Algo {
             tab[j] = pivot;
 
         }
+        return tab;
     }
 
     public static boolean rechercheVal (int nb, int tab[]){
@@ -115,7 +115,6 @@ public class Algo {
         }
         return trouve;
     }
-
 
     public static int rechercheDichotomiqueValProche(int[] tab, int valeur) {
         int debut = 0;
@@ -147,39 +146,47 @@ public class Algo {
 
 
     public static int plusProcheValeur(int[] tab, int val) {
-            int valPlusProche = tab[0];
+        int valPlusProche = tab[0];
 
-            for (int i = 0; i < tab.length; i++) {
-                if (tab[i]==val)
-                    return tab[i];
-
-                else if (Math.abs(tab[i] - val) < Math.abs(valPlusProche - val)) {
-                    valPlusProche = tab[i];
-                }
+        for (int i = 0; i < tab.length; i++) {
+            if (tab[i]==val) {
+                return tab[i];
             }
-
-            return valPlusProche;
+            else if (Math.abs(tab[i] - val) < Math.abs(valPlusProche - val)) {
+                valPlusProche = tab[i];
+            }
+        }
+        return valPlusProche;
     }
 
-    public static int[] PlusGrandVitesse (int [] tab, int val){
-        int [] T= new int[val];
-        for (int i=0; i< T.length;i++)
-            T[i]=tab[i];
-        Arrays.sort(T);
+    public static int[] plusGrandVitesse (int [] tab, int val){
+        int[] t = new int[val];
+        int longueur= t.length-1;
+        int[] newTab= new int[val];
+
+        for (int i=0; i< t.length;i++) {
+            t[i] = tab[i];
+        }
+        Arrays.sort(t);
 
         for (int i=val; i< tab.length;i++){
-            if (tab[i]>T[0]){
-                T[0]=tab[i];
-                Arrays.sort(T);
+            if (tab[i]>t[0]){
+                t[0]=tab[i];
+                Arrays.sort(t);
             }
         }
-        int longueur= T.length-1;
-        int [] Tab= new int[val];
-        for (int i=0; i< Tab.length; i++){
-            Tab[i]=T[longueur-i];
-        }
-        return Tab ;
 
+        for (int i=0; i< newTab.length; i++){
+            newTab[i] = t[longueur-i];
+        }
+        return newTab ;
+    }
+
+    public static void afficherTab (int[] tab){
+
+        for (int j = 0; j < tab.length; j++) {
+            System.out.print(tab[j] + "\t");
+        }
     }
 }
 
