@@ -1,26 +1,27 @@
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Arrays;
-import java.util.Random;
 
 public class Algo {
 
     public static void main(String[] args) {
 
-        int[] tab =générerTabAleatoire(300000);
+        int[] tab = générerTabAleatoire(300000);
         long tempsDébut = System.nanoTime();
 
-        Arrays.sort(tab);
+   //     Arrays.sort(tab);
 
         long tempsFin = System.nanoTime();
 
+        triInsertion(tab);
+        //rechercheVal(55,tab);
+        //rechercheParDichotomie(44,tab);
+        //rechercheDichotomiqueValProche(tab, 110000);
 
         System.out.println("Temps de calcul en millisecondes: " + ((tempsFin - tempsDébut) / 1000000) );
 
        // System.out.println(Arrays.toString(tab));
 
     }
-
 
     /*
         Retourne un tableau de int rempli avec des valeurs aléatoires.
@@ -61,12 +62,11 @@ public class Algo {
         return t;
     }
 
-
-
     /*
         Retourne un tableau contenant les multiples de 4 à partir de 0 ({0, 4, 8, 16...}).
         Utile pour faire des essais de recherche dans un tableau trié.
      */
+
     public static int[] générerTabMultiplesDe4(int longueur) {
         int[] t = new int[longueur];
         for (int i = 0 ; i < t.length ; i++)
@@ -74,7 +74,7 @@ public class Algo {
         return t;
     }
 
-    public static void TriInsertion(int tab[]) {
+    public static int[] triInsertion(int tab[]) {
         int pivot;
         int j;
         for (int i = 0; i < tab.length; i++) {
@@ -87,6 +87,7 @@ public class Algo {
             tab[j] = pivot;
 
         }
+        return tab;
     }
 
     public static boolean rechercheVal (int nb, int tab[]){
@@ -99,25 +100,22 @@ public class Algo {
     }
 
     public static boolean rechercheParDichotomie (int val, int tab []){
+        int indMilieu= tab.length/2;
         int indDebut=0;
         int indFin=tab.length;
         boolean trouve= false;
 
         while(indDebut<=indFin && trouve==false){
-            int indMilieu=(indFin+indDebut)/2;
-
             if (tab[indMilieu] == val)
                 trouve =true;
-
             else if (tab[indMilieu] < val)
                 indDebut=indMilieu++;
             else
                 indFin = indMilieu--;
-
+            indMilieu=(indFin+indDebut)/2;
         }
         return trouve;
     }
-
 
     public static int rechercheDichotomiqueValProche(int[] tab, int valeur) {
         int debut = 0;
@@ -131,9 +129,9 @@ public class Algo {
             }
 
             if (tab[milieu] < valeur) {
-                debut = milieu ++;
+                debut = milieu + 1;
             } else {
-                fin = milieu --;
+                fin = milieu - 1;
             }
         }
 
@@ -145,43 +143,41 @@ public class Algo {
         }
     }
 
-
-
-
     public static int plusProcheValeur(int[] tab, int val) {
-            int valPlusProche = tab[0];
+        int valPlusProche = tab[0];
 
-            for (int i = 0; i < tab.length; i++) {
-                if (tab[i]==val)
-                    return tab[i];
-
-                else if (Math.abs(tab[i] - val) < Math.abs(valPlusProche - val)) {
-                    valPlusProche = tab[i];
-                }
+        for (int i = 0; i < tab.length; i++) {
+            if (tab[i]==val) {
+                return tab[i];
             }
-
-            return valPlusProche;
+            else if (Math.abs(tab[i] - val) < Math.abs(valPlusProche - val)) {
+                valPlusProche = tab[i];
+            }
+        }
+        return valPlusProche;
     }
 
-    public static int[] PlusGrandVitesse (int [] tab, int val){
-        int [] T= new int[val];
-        for (int i=0; i< T.length;i++)
-            T[i]=tab[i];
-        Arrays.sort(T);
+    public static int[] plusGrandVitesse (int [] tab, int val){
+        int[] t = new int[val];
+        int longueur= t.length-1;
+        int[] newTab= new int[val];
+
+        for (int i=0; i< t.length;i++) {
+            t[i] = tab[i];
+        }
+        Arrays.sort(t);
 
         for (int i=val; i< tab.length;i++){
-            if (tab[i]>T[0]){
-                T[0]=tab[i];
-                Arrays.sort(T);
+            if (tab[i]>t[0]){
+                t[0]=tab[i];
+                Arrays.sort(t);
             }
         }
-        int longueur= T.length-1;
-        int [] Tab= new int[val];
-        for (int i=0; i< Tab.length; i++){
-            Tab[i]=T[longueur-i];
-        }
-        return Tab ;
 
+        for (int i=0; i< newTab.length; i++){
+            newTab[i] = t[longueur-i];
+        }
+        return newTab ;
     }
 }
 
