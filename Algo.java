@@ -7,13 +7,13 @@ public class Algo {
 
     public static void main(String[] args) {
 
-        int[] tab =générerTableauTriéParOrdreCroissant(10000000);
+        int[] tab =générerTabAleatoire(300000);
         long tempsDébut = System.nanoTime();
 
         Arrays.sort(tab);
 
         long tempsFin = System.nanoTime();
-        System.out.println(rechercheDichotomiqueValProche(tab,11000000));
+
 
         System.out.println("Temps de calcul en millisecondes: " + ((tempsFin - tempsDébut) / 1000000) );
 
@@ -99,19 +99,21 @@ public class Algo {
     }
 
     public static boolean rechercheParDichotomie (int val, int tab []){
-        int indMilieu= tab.length/2;
         int indDebut=0;
         int indFin=tab.length;
         boolean trouve= false;
 
         while(indDebut<=indFin && trouve==false){
+            int indMilieu=(indFin+indDebut)/2;
+
             if (tab[indMilieu] == val)
                 trouve =true;
+
             else if (tab[indMilieu] < val)
                 indDebut=indMilieu++;
             else
                 indFin = indMilieu--;
-            indMilieu=(indFin+indDebut)/2;
+
         }
         return trouve;
     }
@@ -129,9 +131,9 @@ public class Algo {
             }
 
             if (tab[milieu] < valeur) {
-                debut = milieu + 1;
+                debut = milieu ++;
             } else {
-                fin = milieu - 1;
+                fin = milieu --;
             }
         }
 
