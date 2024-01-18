@@ -8,12 +8,14 @@ public class Algo {
         int[] tab = générerTabAleatoire(300000);
         long tempsDébut = System.nanoTime();
 
-        Arrays.sort(tab);
+   //     Arrays.sort(tab);
 
         long tempsFin = System.nanoTime();
 
-        //triInsertion(tab);
-        rechercheDichotomiqueValProche(tab, 44);
+        triInsertion(tab);
+        //rechercheVal(55,tab);
+        //rechercheParDichotomie(44,tab);
+        //rechercheDichotomiqueValProche(tab, 110000);
 
         System.out.println("Temps de calcul en millisecondes: " + ((tempsFin - tempsDébut) / 1000000) );
 
@@ -60,12 +62,11 @@ public class Algo {
         return t;
     }
 
-
-
     /*
         Retourne un tableau contenant les multiples de 4 à partir de 0 ({0, 4, 8, 16...}).
         Utile pour faire des essais de recherche dans un tableau trié.
      */
+
     public static int[] générerTabMultiplesDe4(int longueur) {
         int[] t = new int[longueur];
         for (int i = 0 ; i < t.length ; i++)
@@ -142,9 +143,6 @@ public class Algo {
         }
     }
 
-
-
-
     public static int plusProcheValeur(int[] tab, int val) {
         int valPlusProche = tab[0];
 
@@ -180,13 +178,6 @@ public class Algo {
             newTab[i] = t[longueur-i];
         }
         return newTab ;
-    }
-
-    public static void afficherTab (int[] tab){
-
-        for (int j = 0; j < tab.length; j++) {
-            System.out.print(tab[j] + "\t");
-        }
     }
 }
 
