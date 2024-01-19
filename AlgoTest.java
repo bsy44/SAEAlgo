@@ -28,4 +28,13 @@ public class AlgoTest {
         assertTrue(Algo.rechercheParDichotomie(5, tab),"Cas présent dans le tableau");
         assertFalse(Algo.rechercheParDichotomie(-4,tab2), "Cas non présent dans le tableau");
     }
+
+    @Test
+    void rechercheVal(){
+        int[] tab = {5, 4, 6, 1, 7, 8, 10};
+
+        assertTrue(Algo.rechercheVal(1, tab),"Cas moyen avec la plus petite valeur");
+        assertTrue(Algo.rechercheVal(10, tab),"Cas moyen avec la plus grande valeur");
+        assertFalse(Algo.rechercheVal(0, tab),"Cas non présent");
+    }
 }

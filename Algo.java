@@ -5,7 +5,7 @@ public class Algo {
 
     public static void main(String[] args) {
 
-        int[] tab = générerTabAleatoire(300000);
+        int[] tab = générerTableauTriéParOrdreDecroissant(300000);
         long tempsDébut = System.nanoTime();
 
    //     Arrays.sort(tab);
@@ -14,7 +14,7 @@ public class Algo {
 
         triInsertion(tab);
         //rechercheVal(55,tab);
-        //rechercheParDichotomie(44,tab);
+        //rechercheParDichotomie(55,tab);
         //rechercheDichotomiqueValProche(tab, 110000);
 
         System.out.println("Temps de calcul en millisecondes: " + ((tempsFin - tempsDébut) / 1000000) );
@@ -92,7 +92,7 @@ public class Algo {
 
     public static boolean rechercheVal (int nb, int tab[]){
         for (int i = 0; i < tab.length; i++) {
-            if (tab[i]==nb){
+            if (tab[i] == nb){
                 return true;
             }
         }
