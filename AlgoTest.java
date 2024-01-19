@@ -1,5 +1,10 @@
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+import static org.testng.internal.junit.ArrayAsserts.assertArrayEquals;
+
+
+import org.testng.annotations.Test;
 
 public class AlgoTest {
 
@@ -22,8 +27,8 @@ public class AlgoTest {
 
     @Test
     void rechercheParDichotomie(){
-        int[] tab = {5, 4, 6, 1, 7, 8, 10};
-        int[] tab2 = {1, 7, 6, 0, 7, 8, 10};
+        int[] tab = {4, 5, 6, 7, 8, 8, 10};
+        int[] tab2 = {1, 6, 7, 7, 7, 8, 10};
 
         assertTrue(Algo.rechercheParDichotomie(5, tab),"Cas présent dans le tableau");
         assertFalse(Algo.rechercheParDichotomie(-4,tab2), "Cas non présent dans le tableau");

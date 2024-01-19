@@ -5,16 +5,16 @@ public class Algo {
 
     public static void main(String[] args) {
 
-        int[] tab = générerTabAleatoire(300000);
+        int[] tab = générerTableauTriéParOrdreCroissant(300);
         long tempsDébut = System.nanoTime();
 
    //     Arrays.sort(tab);
 
         long tempsFin = System.nanoTime();
 
-        triInsertion(tab);
+        //triInsertion(tab);
         //rechercheVal(55,tab);
-        //rechercheParDichotomie(44,tab);
+        rechercheParDichotomie(-1,tab);
         //rechercheDichotomiqueValProche(tab, 110000);
 
         System.out.println("Temps de calcul en millisecondes: " + ((tempsFin - tempsDébut) / 1000000) );
@@ -100,21 +100,20 @@ public class Algo {
     }
 
     public static boolean rechercheParDichotomie (int val, int tab []){
-        int indMilieu= tab.length/2;
         int indDebut=0;
-        int indFin=tab.length;
-        boolean trouve= false;
+        int indFin=tab.length-1;
 
-        while(indDebut<=indFin && trouve==false){
+        while(indDebut<=indFin){
+            System.out.println(indFin);
+            int indMilieu=(indFin+indDebut)/2;
             if (tab[indMilieu] == val)
-                trouve =true;
+                return true;
             else if (tab[indMilieu] < val)
-                indDebut=indMilieu++;
+                indDebut=indMilieu+1;
             else
-                indFin = indMilieu--;
-            indMilieu=(indFin+indDebut)/2;
+                indFin = indMilieu-1;
         }
-        return trouve;
+        return false;
     }
 
     public static int rechercheDichotomiqueValProche(int[] tab, int valeur) {
@@ -129,9 +128,9 @@ public class Algo {
             }
 
             if (tab[milieu] < valeur) {
-                debut = milieu + 1;
+                debut = milieu ++;
             } else {
-                fin = milieu - 1;
+                fin = milieu --;
             }
         }
 
