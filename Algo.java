@@ -5,17 +5,17 @@ public class Algo {
 
     public static void main(String[] args) {
 
-        int[] tab = générerTableauTriéParOrdreCroissant(300000);
+        int[] tab = générerTableauTriéParOrdreDecroissant(300000);
         long tempsDébut = System.nanoTime();
 
    //     Arrays.sort(tab);
 
-        long tempsFin = System.nanoTime();
-
-        //triInsertion(tab);
+        triInsertion(tab);
         //rechercheVal(55,tab);
-        rechercheParDichotomie(44,tab);
+        //rechercheParDichotomie(44,tab);
         //rechercheDichotomiqueValProche(tab, 110000);
+
+        long tempsFin = System.nanoTime();
 
         System.out.println("Temps de calcul en millisecondes: " + ((tempsFin - tempsDébut) / 1000000) );
 
