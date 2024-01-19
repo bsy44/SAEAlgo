@@ -42,4 +42,19 @@ public class AlgoTest {
         assertTrue(Algo.rechercheVal(10, tab),"Cas moyen avec la plus grande valeur");
         assertFalse(Algo.rechercheVal(0, tab),"Cas non présent");
     }
+
+    @Test
+    void rechercheDichotomiqueValProche() {
+        int[] tab = {1, 3, 5, 7, 9};
+        int result1 = Algo.rechercheDichotomiqueValProche(tab, 5);
+        int result2 = Algo.rechercheDichotomiqueValProche(tab, 8);
+        int result3 = Algo.rechercheDichotomiqueValProche(tab, 6);
+        int result4 = Algo.rechercheDichotomiqueValProche(tab, 12);
+
+        assertEquals(result1, 5, "Cas présent dans le tableau");
+        assertEquals(result2, 9, "Cas la valeur la plus proche est dans le tableau");
+        assertEquals(result3, 5, "Cas la valeur la plus proche est en dehors du tableau (plus petite)");
+        assertEquals(result4, 9, "Cas la valeur la plus proche est en dehors du tableau (plus grande)");
+    }
+
 }
